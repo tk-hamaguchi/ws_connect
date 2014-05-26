@@ -1,4 +1,5 @@
-source 'https://rubygems.org'
+source "http://bundler-api.herokuapp.com"
+#source 'https://rubygems.org'
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -12,7 +13,7 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-# gem 'therubyracer',  platforms: :ruby
+gem 'therubyracer',  platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -38,3 +39,43 @@ gem 'spring',        group: :development
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+
+gem "devise"
+gem "devise-i18n"
+gem "simple_form"
+gem "kaminari"
+gem "bootstrap-kaminari-views"
+gem "rails_config"
+gem "paranoia"
+gem "puma"
+gem "bootstrap-sass"
+gem "font-awesome-sass"
+group :test do
+  gem "spring"
+  gem "spring-commands-rspec"
+  gem "spring-commands-cucumber"
+  gem "rb-inotify", "~> 0.9"
+  gem "rspec-rails", "~> 3.0.0.beta2"
+  gem "poltergeist"
+  gem "cucumber-rails", require: false
+  gem "database_cleaner"
+  gem "factory_girl_rails"
+  gem "faker"
+  gem "faker-japanese"
+  gem "guard"
+  gem "guard-rails"
+  gem "guard-rspec"
+  gem "guard-cucumber"
+  gem "guard-coffeescript"
+  gem "guard-migrate"
+  gem "guard-livereload"
+  gem "guard-bundler"
+  gem "guard-yard"
+end
+
+group :development do
+  gem "capistrano", "~> 3.1", require: false
+  gem "capistrano-bundler", require: false
+  gem "capistrano-rvm", "~> 0.1.0", require: false
+  gem "capistrano-rails", "~> 1.1.0", require: false
+end

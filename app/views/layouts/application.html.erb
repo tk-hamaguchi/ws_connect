@@ -1,14 +1,18 @@
 <!DOCTYPE html>
-<html>
-<head>
-  <title>WsConnect</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-
-<%= yield %>
-
-</body>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title><%= t 'app_name' %></title>
+    <meta name="google" value="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <%= render file:'layouts/navbar' %>
+    <div class="container">
+      <%= yield %>
+    </div>
+  </body>
 </html>

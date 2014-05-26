@@ -1,0 +1,12 @@
+check process <%= fetch(:application) %> with pidfile <%= current_path %>/tmp/pids/puma.pid
+  group railsapp
+  start program = "/usr/local/rvm/bin/rvm-shell <%= fetch(:rvm_ruby_version) %> -c 'cd <%= current_path %> ; RAILS_ENV=production bundle exec puma -C config/puma.rb -b unix:///var/lib/puma/<%= fetch(:application) %>.sock'" as uid rails and gid rails
+  stop program = "/bin/kill `cat <%= current_path %>/tmp/pids/puma.pid`" as uid rails and gid rails
+  if failed unixsocket /var/lib/puma/<%= fetch(:application) %>.sock then restart
+  if 5 restarts within 5 cycles then timeout
+  depends on <%= fetch(:application) %>_database_yml
+
+check file <%= fetch(:application) %>_database_yml path <%= current_path %>/config/database.yml
+  group railsapp
+  if failed checksum then unmonitor
+

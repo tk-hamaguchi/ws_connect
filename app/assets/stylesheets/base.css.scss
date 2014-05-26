@@ -1,0 +1,25 @@
+.navbar .navbar-right {
+  padding-top:   7px;
+  padding-right: 10px;
+  li {
+    margin-left: 6px;
+  }
+  .btn {
+    height: 36px;
+    line-height: 30px;
+    padding: 3px 15px;
+  }
+  .btn-primary {
+    color: white;
+  }
+  .btn-default:hover {
+    color: black;
+    background-color: #CCC;
+  }
+  .btn-primary:hover {
+    background-color: #33C;
+  }
+}
+input.form-control{
+  width: auto;
+};

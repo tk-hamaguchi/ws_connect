@@ -1,0 +1,57 @@
+server{
+  listen       80;
+  server_name _;
+  location / {
+    rewrite ^(.*) https://$http_host$1;
+    break;
+  }
+}
+
+
+server{
+  listen 443;
+  server_name _;
+
+  root <%= current_path %>/public/;
+
+  client_max_body_size 100M;
+
+
+  ssl on;
+  ssl_certificate     server.crt;
+  ssl_certificate_key server.key;
+
+  ssl_session_timeout 5m;
+
+  ssl_protocols       SSLv3 TLSv1;
+  ssl_ciphers         HIGH:!ADH:!aNULL:!MD5;
+
+  ssl_prefer_server_ciphers   on;
+
+  location /assets/ {
+    root <%= current_path %>/public/;
+  }
+
+  location /system/ {
+    root <%= current_path %>/public/;
+  }
+
+  location /favicon.ico {
+    root <%= current_path %>/public/;
+  }
+
+
+  location / {
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_set_header Host $http_host;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_redirect off;
+    proxy_read_timeout 300;
+
+    proxy_pass http://<%= fetch(:application) %>;
+  }
+}
+upstream <%= fetch(:application) %> {
+  server unix:///var/lib/puma/<%= fetch(:application) %>.sock;
+}
