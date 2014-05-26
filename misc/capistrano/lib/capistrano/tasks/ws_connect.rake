@@ -1,6 +1,6 @@
 namespace :deploy do
 
-  desc 'upload importabt files'
+  desc 'upload database.yml files'
   task :upload do
     on roles(:app) do |host|
       require 'erb'
@@ -16,10 +16,9 @@ namespace :deploy do
     end
   end
 
-  after 'deploy:check:make_linked_dirs', 'deploy:upload'
+  before 'deploy:check:linked_files', 'deploy:upload'
   after :finishing, 'deploy:cleanup'
   after 'deploy:cleanup', 'deploy:add_permission'
-
 
   desc 'upload monit config files'
   task :upload_monitrc do
@@ -49,6 +48,6 @@ namespace :deploy do
 
   after 'deploy:finishing',           'deploy:upload_monitrc'
   after 'deploy:upload_monitrc',      'deploy:upload_nginx_config'
-  after 'deploy:upload_nginx_config', 'deploy:restart_puma'
+#  after 'deploy:upload_nginx_config', 'deploy:restart_puma'
 
 end

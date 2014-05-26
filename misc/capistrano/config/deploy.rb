@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'ws_connect'
-set :repo_url, 'git@github.com:tk-hamaguchi/ws_connect.git'
+set :repo_url, 'https://github.com/tk-hamaguchi/ws_connect.git'
 
 # Default branch is :master
 ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
